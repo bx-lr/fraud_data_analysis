@@ -135,6 +135,7 @@ Digging a little deeper into the data, the amount variable (shown as Transaction
 There did not appear to be any notable outliers when investigating the transaction counts for merchant category and gender .
 
 ![alt text](images\image-2.png)
+
 ![alt text](images\image-3.png)
 
 The distance between a purchaser and the merchant also appeared normal. 
@@ -144,6 +145,7 @@ The distance between a purchaser and the merchant also appeared normal.
 However, when we look at spending distribution compared to the job type we begin to see some outliers emerge. Looking at the mean purchase amount per job and merchant category we can see that the average purchases is below $200.0.
 
 ![alt text](images\image-5.png)
+
 ![alt text](images\image-6.png)
 
 Moving the analysis into the time domain we can see that some card numbers have multiple transactions within a very short time span ( < 30 seconds).
