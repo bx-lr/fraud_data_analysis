@@ -1,6 +1,38 @@
 # Project Overview: fraud_data_analysis
 This project implements an ensemble approach to detect fraudulent credit card transactions using multiple anomaly detection algorithms. The script is designed to use unsupervised machine learning models to identify anomalous transaction data that may indicate fraudulent activity.
 
+## Project Structure
+The project structure is shown below. Contents of the `data` directory is not included in the repository due to file size limitations. 
+
+```bash
+.
+├── data
+│   ├── cc-transactions-project.csv
+│   ├── cc-transactions-test-project.csv
+│   └── project-dataset.zip
+├── images
+│   ├── image-10.png
+│   ├── image-1.png
+│   ├── image-2.png
+│   ├── image-3.png
+│   ├── image-4.png
+│   ├── image-5.png
+│   ├── image-6.png
+│   ├── image-7.png
+│   ├── image-8.png
+│   ├── image-9.png
+│   └── image.png
+├── output
+│   ├── output.csv
+│   └── output.png
+├── README.md
+├── requirements.txt
+└── scripts
+    ├── eda.ipynb
+    └── main.py
+```
+
+
 ## Features
 - Multi-model Ensemble Approach: Combines results from Isolation Forest, One-Class SVM, Local Outlier Factor, HDBSCAN, and Z-score
 - Feature Engineering: Creates specialized features including time patterns, age verification, and transaction velocity
