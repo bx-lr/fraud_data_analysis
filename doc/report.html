@@ -1,0 +1,151 @@
+<h1>Project Overview: fraud<em>data</em>analysis</h1>
+
+<p>This project implements an ensemble approach to detect fraudulent credit card transactions using multiple anomaly detection algorithms. The script is designed to use unsupervised machine learning models to identify anomalous transaction data that may indicate fraudulent activity.</p>
+
+<h2>Project Structure</h2>
+
+<p>The project structure is shown below. Contents of the <code>data</code> directory is not included in the repository due to file size limitations. </p>
+
+<p><img src="images/image-11.png" alt="alt text" title="" /></p>
+
+<h2>Features</h2>
+
+<ul>
+<li>Multi-model Ensemble Approach: Combines results from Isolation Forest, One-Class SVM, Local Outlier Factor, HDBSCAN, and Z-score</li>
+<li>Feature Engineering: Creates specialized features including time patterns, age verification, and transaction velocity</li>
+<li>Unsupervised Learning: Doesn't require labeled fraud examples for training</li>
+<li>Normalized Scoring: Combines multiple anomaly scores into a unified ensemble score</li>
+<li>Threshold-based Classification: Uses quantile-based thresholding (99th percentile) to identify potential fraud</li>
+</ul>
+
+<h2>Installation &amp; Execution</h2>
+
+<p>To install and run the analysis script please perform the following:</p>
+
+<p>```bash</p>
+
+<h1>setup a virtual environment</h1>
+
+<h1>this was developed with python 3.11</h1>
+
+<p>pyenv activate 3.11.0.venv
+python3 -m pip install -r requirements.txt</p>
+
+<h1>execute our script</h1>
+
+<p>python3 scripts/main.py -i data/ -o output/
+```</p>
+
+<h2>Output</h2>
+
+<p>The script will generate predictions and output a file with an <code>is_fraud</code> column indicating potentially fraudulent transactions (1 = fraud, 0 = legitimate). Script output timing:</p>
+
+<p>```bash
+training on: 129667 samples
+running isolation forest model
+        training time: 0.88 seconds
+running one-class svm model
+        training time: 49.39 seconds
+running local outlier factor model
+        training time: 9.23 seconds
+running hdbscan model
+        training time: 46.65 seconds
+getting zscores
+        training time: 0.00 seconds</p>
+
+<p>testing on: 555719 samples
+generating predictions on test data
+running isof on test data
+        time: 1.06 seconds
+running svm on test data
+        time: 68.61 seconds
+running lof on test data
+        time: 20.17 seconds
+running hdbscan on test data
+        time: 217.77 seconds
+running zscore on test data
+        time: 0.00 seconds</p>
+
+<p>```</p>
+
+<p>The script will also output the distribution of the ensemble scores. This may be used to finetune the output. </p>
+
+<p><img src="images/image-10.png" alt="alt text" title="" /></p>
+
+<h1>Methodology</h1>
+
+<h2>Data Preparation and Feature Engineering</h2>
+
+<p>The script performs several data preparation steps:
+- Extracting time features (hour of day, time categorization)
+- Computing purchaser age at transaction time
+- Encoding categorical variables
+- Calculating time between transactions per card
+- Log-transforming transaction amounts
+- Standardizing numerical features</p>
+
+<h2>Anomaly Detection Models</h2>
+
+<p>Five different anomaly detection techniques are used:
+- Isolation Forest: Effective for isolating outliers in high-dimensional spaces
+- One-Class SVM: Identifies regions in the feature space where normal transactions occur
+- Local Outlier Factor: Detects samples that are locally outlying compared to their neighbors
+- HDBSCAN: Density-based clustering to identify points in low-density regions
+- Z-score Analysis: Statistical method to detect values far from the mean (applied to log-transformed transaction amounts)</p>
+
+<p>Additional factors like age verification are also incorporated into the ensemble.</p>
+
+<h2>Ensemble Approach</h2>
+
+<p>The script creates a unified fraud score by:
+- Calculating anomaly scores from each model
+- Normalizing scores to the [0,1] range
+- Classifying transactions with scores above the 99th percentile as potentially fraudulent</p>
+
+<h1>EDA</h1>
+
+<h2>Analysis Findings</h2>
+
+<p>Analysis of the training dataset identified the following key findings:
+- Bimodal Distribution: Transaction amounts show a bimodal distribution when log-transformed
+- Time Anomalies: Some cards had multiple transactions within very short time spans (&lt;30 seconds)
+- Off-hour Transactions: Unusual geographic patterns for transactions occurring during unusual hours
+- Age Anomalies: Several transactions where the purchaser appears too young to be making a purchase</p>
+
+<h2>Analysis Narrative</h2>
+
+<p>Analysis of the file “cc-transactions-project.csv” has uncovered several insights. First, the data contains 1296675 entries with 22 columnar variables. Every column / row contains data and no missing or NA values were observed. The record<em>number and transaction</em>number appear to be unique values related to a particular merchant transaction and are most likely uninformative. Analysis of the merchant, category, and job identified 939, 14, and 494 unique categorical values per variable. Likewise, the cc_number variable was found to contain 983 unique values.</p>
+
+<p><img src="images/image.png" alt="alt text" title="" /></p>
+
+<p>Digging a little deeper into the data, the amount variable (shown as Transaction Amount) displays a bi-modal distribution when log transformed. </p>
+
+<p><img src="images/image-1.png" alt="alt text" title="" /></p>
+
+<p>There did not appear to be any notable outliers when investigating the transaction counts for merchant category and gender .</p>
+
+<p><img src="images/image-2.png" alt="alt text" title="" /></p>
+
+<p><img src="images/image-3.png" alt="alt text" title="" /></p>
+
+<p>The distance between a purchaser and the merchant also appeared normal. </p>
+
+<p><img src="images/image-4.png" alt="alt text" title="" /></p>
+
+<p>However, when we look at spending distribution compared to the job type we begin to see some outliers emerge. Looking at the mean purchase amount per job and merchant category we can see that the average purchases is below $200.0.</p>
+
+<p><img src="images/image-5.png" alt="alt text" title="" /></p>
+
+<p><img src="images/image-6.png" alt="alt text" title="" /></p>
+
+<p>Moving the analysis into the time domain we can see that some card numbers have multiple transactions within a very short time span ( &lt; 30 seconds).</p>
+
+<p><img src="images/image-7.png" alt="alt text" title="" /></p>
+
+<p>Adding in a geography component to the purchase time we can see multiple transactions occurring at off peak hours. </p>
+
+<p><img src="images/image-8.png" alt="alt text" title="" /></p>
+
+<p>Finally, looking into the dob of the purchaser when compared to the purchase date we see several transactions where the purchaser appears to be too young to be making a purchase. </p>
+
+<p><img src="images/image-9.png" alt="alt text" title="" /></p>

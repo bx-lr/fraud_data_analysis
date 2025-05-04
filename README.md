@@ -4,34 +4,7 @@ This project implements an ensemble approach to detect fraudulent credit card tr
 ## Project Structure
 The project structure is shown below. Contents of the `data` directory is not included in the repository due to file size limitations. 
 
-```bash
-.
-├── data
-│   ├── cc-transactions-project.csv
-│   ├── cc-transactions-test-project.csv
-│   └── project-dataset.zip
-├── images
-│   ├── image-10.png
-│   ├── image-1.png
-│   ├── image-2.png
-│   ├── image-3.png
-│   ├── image-4.png
-│   ├── image-5.png
-│   ├── image-6.png
-│   ├── image-7.png
-│   ├── image-8.png
-│   ├── image-9.png
-│   └── image.png
-├── output
-│   ├── output.csv
-│   └── output.png
-├── README.md
-├── requirements.txt
-└── scripts
-    ├── eda.ipynb
-    └── main.py
-```
-
+![alt text](images/image-11.png)
 
 ## Features
 - Multi-model Ensemble Approach: Combines results from Isolation Forest, One-Class SVM, Local Outlier Factor, HDBSCAN, and Z-score
@@ -126,38 +99,38 @@ Analysis of the training dataset identified the following key findings:
 ## Analysis Narrative
 Analysis of the file “cc-transactions-project.csv” has uncovered several insights. First, the data contains 1296675 entries with 22 columnar variables. Every column / row contains data and no missing or NA values were observed. The record_number and transaction_number appear to be unique values related to a particular merchant transaction and are most likely uninformative. Analysis of the merchant, category, and job identified 939, 14, and 494 unique categorical values per variable. Likewise, the cc_number variable was found to contain 983 unique values.
 
-![alt text](images\image.png)
+![alt text](images/image.png)
 
 Digging a little deeper into the data, the amount variable (shown as Transaction Amount) displays a bi-modal distribution when log transformed. 
 
-![alt text](images\image-1.png)
+![alt text](images/image-1.png)
 
 There did not appear to be any notable outliers when investigating the transaction counts for merchant category and gender .
 
-![alt text](images\image-2.png)
+![alt text](images/image-2.png)
 
-![alt text](images\image-3.png)
+![alt text](images/image-3.png)
 
 The distance between a purchaser and the merchant also appeared normal. 
 
-![alt text](images\image-4.png)
+![alt text](images/image-4.png)
 
 However, when we look at spending distribution compared to the job type we begin to see some outliers emerge. Looking at the mean purchase amount per job and merchant category we can see that the average purchases is below $200.0.
 
-![alt text](images\image-5.png)
+![alt text](images/image-5.png)
 
-![alt text](images\image-6.png)
+![alt text](images/image-6.png)
 
 Moving the analysis into the time domain we can see that some card numbers have multiple transactions within a very short time span ( < 30 seconds).
 
 
-![alt text](images\image-7.png)
+![alt text](images/image-7.png)
 
 Adding in a geography component to the purchase time we can see multiple transactions occurring at off peak hours. 
 
-![alt text](images\image-8.png)
+![alt text](images/image-8.png)
 
 Finally, looking into the dob of the purchaser when compared to the purchase date we see several transactions where the purchaser appears to be too young to be making a purchase. 
 
-![alt text](images\image-9.png)
+![alt text](images/image-9.png)
 
