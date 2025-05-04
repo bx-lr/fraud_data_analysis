@@ -207,7 +207,7 @@ def main(indir, outdir):
     quant = 0.99
     # sate for random sampling
     state = 4444
-    # 30% of training data to use for modeling
+    # 10% of training data to use for modeling
     sample_frac = 0.1
 
     # get our datasets
