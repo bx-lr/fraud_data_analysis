@@ -19,11 +19,11 @@ pyenv activate 3.11.0.venv
 python3 -m pip install -r requirements.txt
 
 # execute our script
-python3 scripts/main.py -i data/ -o data/
+python3 scripts/main.py -i data/ -o output/
 ```
 
 ## Output
-The script will generate predictions and output a file with an `is_fraud` column indicating potentially fraudulent transactions (1 = fraud, 0 = legitimate). Sample output timing:
+The script will generate predictions and output a file with an `is_fraud` column indicating potentially fraudulent transactions (1 = fraud, 0 = legitimate). Script output timing:
 
 ```bash
 training on: 129667 samples
