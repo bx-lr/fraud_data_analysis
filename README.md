@@ -1,5 +1,5 @@
 # Project Overview: fraud_data_analysis
-This project implements an ensemble approach to detect fraudulent credit card transactions using multiple anomaly detection algorithms. The script is designed to use unsupervised machine learning models to identify anomalous transaction data that may indicate fraudulent activity.
+This project implements an ensemble approach to detect fraudulent credit card transactions using multiple unsupervised machine learning algorithms. The script is designed to identify anomalous transaction data indicative of fraudulent activity.
 
 ## Project Structure
 The project structure is shown below. Contents of the `data` directory is not included in the repository due to file size limitations. 
